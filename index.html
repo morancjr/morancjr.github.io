@@ -7,83 +7,53 @@
     <link href="./src/styles-output.css" rel="stylesheet">
 </head>
 <body>
-<aside class="sidebar" aria-label="Desktop nav menu">
-    <div class="profile-header">
-        <div>
-            <!--<div class="avatar">-->
-            <!--<img src="" alt="Christian Jay Moran">-->
-            <!--</div>-->
-            <h1>Christian Jay Moran</h1>
-            <p>Software Engineer</p>
-        </div>
-    </div>
-
-    <ul class="nav-links">
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="./work.html">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#">Photos</a></li>
-        <li><a href="#">Notes</a></li>
-    </ul>
-
-    <div class="contact-info">
-        <p>+1 316 305 4784</p>
-        <p>morancjr@gmail.com</p>
-        <a target="_blank" rel="noopener noreferrer"
-           href="https://www.linkedin.com/in/christian-jay-moran/">LinkedIn</a>
-    </div>
-</aside>
-
-<aside class="mobile-nav" style="display: none;" aria-label="Mobile nav menu">
-    <div class="profile-header">
-        <a href="/">
-            <!--<div class="avatar">-->
-            <!--<img src="" alt="Christian Jay Moran">-->
-            <!--</div>-->
-            <h1>Christian Jay Moran</h1>
-            <p>Software Engineer</p>
-        </a>
-    </div>
-
-    <ul class="nav-links" id="navLinks">
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">Work</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Photos</a></li>
-        <li><a href="#">Notes</a></li>
-    </ul>
-
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            hamburger.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.mobile-nav .nav-links a').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                navLinks.classList.remove('open');
-                hamburger.classList.remove('active');
-            });
-        });
-    </script>
-</aside>
-
+<div id="navbar-placeholder" style="min-height: 60px;"></div>
 <main class="main">
     <h1>Welcome</h1>
     <p id="about">Add your main content here, to the right of the sidebar.</p>
 </main>
 
+<script>
+    <!-- Hamburger Functionality   -->
+    document.addEventListener("navbarLoaded", () => {
+        // Initialize hamburger menu functionality after content loads
+        const hamburger = document.getElementById(".hamburger");
+        const navLinks = document.getElementById(".navLinks");
+
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+                hamburger.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.mobile-nav > .nav-links a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    navLinks.classList.remove('open');
+                    hamburger.classList.remove('active');
+                });
+            });
+        }
+    })
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("nav.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("navbar-placeholder").innerHTML = data;
+                document.dispatchEvent(new Event("navbarLoaded"));
+
+                // Loop through all anchor tags on the page
+                document.querySelectorAll('.nav-links > a').forEach(link => {
+                    // Check if the href contains the specific file name
+                    if (link.getAttribute('href').length === 2) {
+                        // Add your active class
+                        link.classList.add('active');
+                    }
+                });
+            })
+            .catch(error => console.error("Error loading navigation:", error));
+    });
+</script>
 </body>
 </html>
