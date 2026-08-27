@@ -68,10 +68,10 @@
             hamburger.classList.toggle('active');
         });
 
-        document.querySelectorAll('.mobile-nav .nav-links a').forEach(link => {
+        document.querySelectorAll('.mobile-nav > .nav-links a').forEach(link => {
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.mobile-nav > .nav-links a').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
                 navLinks.classList.remove('open');
                 hamburger.classList.remove('active');
