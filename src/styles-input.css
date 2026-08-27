@@ -1,1 +1,213 @@
 @import 'tailwindcss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: #ececec;
+    color: #222;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+    width: 280px;
+    background: #ececec;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1em;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-header h1 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    letter-spacing: -0.01em;
+}
+
+.profile-header p {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #222;
+    font-size: 24px;
+    display: inline-block;
+    transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+    opacity: 0.5;
+}
+
+.nav-links a.active {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-links a.active::after {
+    content: "";
+    text-decoration: underline;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #222;
+}
+
+.sidebar .contact-info {
+    margin-top: auto;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #444;
+}
+
+.sidebar .contact-info a {
+    color: #222;
+    text-decoration: underline;
+}
+
+/* ---- MAIN CONTENT  ---- */
+.main {
+    flex: 1;
+    padding: 48px 56px;
+    background: #fff;
+}
+
+.main h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.main p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    max-width: 640px;
+}
+
+/* ---- HAMBURGER (hidden on desktop) ---- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.hamburger span {
+    width: 24px;
+    height: 2px;
+    background: #222;
+    transition: 0.3s;
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 768px) {
+    /* hide the vertical sidebar */
+    .sidebar {
+        display: none;
+    }
+
+    body {
+        flex-direction: column;
+    }
+
+    /* show a horizontal top bar instead */
+    .mobile-nav {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        background: #ececec;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .mobile-nav .profile-header {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .mobile-nav .nav-links {
+        flex-direction: row;
+        gap: 18px;
+        align-items: center;
+    }
+
+    .mobile-nav .nav-links a {
+        font-size: 18px;
+    }
+}
+
+.hamburger {
+    display: flex;
+}
+
+/* collapse links off-screen until opened */
+.mobile-nav .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: #ececec;
+    gap: 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mobile-nav .nav-links.open {
+    max-height: 400px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.mobile-nav .nav-links a {
+    font-size: 22px;
+}

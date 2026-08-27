@@ -1,5 +1,4 @@
 /*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
-@layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -8,10 +7,6 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-700: oklch(50.5% 0.213 27.518);
-    --color-red-800: oklch(44.4% 0.177 26.899);
-    --text-3xl: 1.875rem;
-    --text-3xl--line-height: calc(2.25 / 1.875);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -177,52 +172,179 @@
   .contents {
     display: contents;
   }
-  .table {
-    display: table;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: #ececec;
+  color: #222;
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 280px;
+  background: #ececec;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+.sidebar .profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1em;
+}
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-header h1 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+.profile-header p {
+  font-size: 13px;
+  font-weight: 400;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #222;
+  font-size: 24px;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover {
+  opacity: 0.5;
+}
+.nav-links a.active {
+  position: relative;
+  display: inline-block;
+}
+.nav-links a.active::after {
+  content: "";
+  text-decoration: underline;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #222;
+}
+.sidebar .contact-info {
+  margin-top: auto;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #444;
+}
+.sidebar .contact-info a {
+  color: #222;
+  text-decoration: underline;
+}
+.main {
+  flex: 1;
+  padding: 48px 56px;
+  background: #fff;
+}
+.main h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+.main p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  max-width: 640px;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: #222;
+  transition: 0.3s;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
   }
-  .border-collapse {
-    border-collapse: collapse;
+  body {
+    flex-direction: column;
   }
-  .resize {
-    resize: both;
+  .mobile-nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: #ececec;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
+  .mobile-nav .profile-header {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
   }
-  .text-3xl {
-    font-size: var(--text-3xl);
-    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  .mobile-nav .nav-links {
+    flex-direction: row;
+    gap: 18px;
+    align-items: center;
   }
-  .text-red-700 {
-    color: var(--color-red-700);
-  }
-  .text-red-800 {
-    color: var(--color-red-800);
-  }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
+  .mobile-nav .nav-links a {
+    font-size: 18px;
   }
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
+.hamburger {
+  display: flex;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
+.mobile-nav .nav-links {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  background: #ececec;
+  gap: 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
 }
-@layer properties {
-  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
-    *, ::before, ::after, ::backdrop {
-      --tw-border-style: solid;
-      --tw-outline-style: solid;
-    }
-  }
+.mobile-nav .nav-links.open {
+  max-height: 400px;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.mobile-nav .nav-links a {
+  font-size: 22px;
 }
