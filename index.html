@@ -32,16 +32,6 @@
         <a target="_blank" rel="noopener noreferrer"
            href="https://www.linkedin.com/in/christian-jay-moran/">LinkedIn</a>
     </div>
-
-    <script>
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-    </script>
 </aside>
 
 <aside class="mobile-nav" style="display: none;" aria-label="Mobile nav menu">
