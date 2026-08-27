@@ -185,6 +185,10 @@ body {
   display: flex;
   min-height: 100vh;
 }
+.navbar-placeholder {
+  min-width: 280px;
+  min-height: 5em;
+}
 .sidebar {
   width: 280px;
   background: #ececec;
