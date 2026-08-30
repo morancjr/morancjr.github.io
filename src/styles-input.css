@@ -13,7 +13,7 @@ body {
     display: flex;
     min-height: 100vh;
 }
-
+/* Avoids content jumping/tearing while loading navbar*/
 .navbar-placeholder {
     min-width: 280px;
     min-height: 5em;
@@ -29,6 +29,7 @@ body {
     height: 100vh;
     position: sticky;
     top: 0;
+    border-right: 1px solid #ddd;
 }
 
 .sidebar .profile-header {
@@ -113,9 +114,7 @@ body {
 
 /* ---- MAIN CONTENT  ---- */
 .main {
-    flex: 1;
-    padding: 48px 56px;
-    background: #fff;
+    @apply flex-1 px-12 py-14 bg-white max-w-7xl mx-auto w-full;
 }
 
 .main h1 {
@@ -130,11 +129,21 @@ body {
     max-width: 640px;
 }
 
-/* ---- Desktop to avoid content jumping while loading ---- */
-@media (min-width: 768px) {
-
+.technologies {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-4 auto-rows-fr;
 }
 
+.technologies > div {
+    @apply flex gap-4 p-2 rounded-xl border h-full bg-blue-300;
+}
+
+.technologies > div > .logo {
+    @apply flex p-3 rounded-lg shrink-0
+}
+
+.technologies > div > .logo > img {
+    @apply flex rounded-lg shrink-0 w-12 h-12
+}
 /* ---- HAMBURGER (hidden on desktop) ---- */
 .hamburger {
     display: none;
@@ -174,6 +183,7 @@ body {
         position: sticky;
         top: 0;
         z-index: 100;
+        border-bottom: 1px solid #ddd;
     }
 
     .mobile-nav .profile-header {
