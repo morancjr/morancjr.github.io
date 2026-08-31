@@ -8,14 +8,22 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-blue-300: oklch(80.9% 0.105 251.813);
-    --color-white: #fff;
     --spacing: 0.25rem;
+    --container-2xl: 42rem;
+    --container-3xl: 48rem;
     --container-7xl: 80rem;
     --text-base: 1rem;
     --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
     --font-weight-bold: 700;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
@@ -181,9 +189,6 @@
   .fixed {
     position: fixed;
   }
-  .relative {
-    position: relative;
-  }
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
   }
@@ -195,28 +200,35 @@
     margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
     margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
   }
-  .bg-\[\#000\]\/20 {
-    background-color: color-mix(in oklab, #000 20%, transparent);
+  .bg-\[\#2B2B2B\]\/50 {
+    background-color: color-mix(in oklab, #2B2B2B 50%, transparent);
   }
-  .py-16 {
-    padding-block: calc(var(--spacing) * 16);
+  .bg-\[\#3B4A2A\]\/50 {
+    background-color: color-mix(in oklab, #3B4A2A 50%, transparent);
   }
-  .text-base {
-    font-size: var(--text-base);
-    line-height: var(--tw-leading, var(--text-base--line-height));
+  .bg-\[\#4A2630\]\/50 {
+    background-color: color-mix(in oklab, #4A2630 50%, transparent);
   }
-  .text-xl {
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
+  .bg-\[\#5A351F\]\/50 {
+    background-color: color-mix(in oklab, #5A351F 50%, transparent);
   }
-  .font-bold {
-    --tw-font-weight: var(--font-weight-bold);
-    font-weight: var(--font-weight-bold);
+  .bg-\[\#5A4520\]\/50 {
+    background-color: color-mix(in oklab, #5A4520 50%, transparent);
   }
-  @media (width >= 40rem) {
-    .sm\:py-24 {
-      padding-block: calc(var(--spacing) * 24);
-    }
+  .bg-\[\#173F52\]\/50 {
+    background-color: color-mix(in oklab, #173F52 50%, transparent);
+  }
+  .bg-\[\#183F52\]\/50 {
+    background-color: color-mix(in oklab, #183F52 50%, transparent);
+  }
+  .bg-\[\#274A38\]\/50 {
+    background-color: color-mix(in oklab, #274A38 50%, transparent);
+  }
+  .bg-\[\#332B52\]\/50 {
+    background-color: color-mix(in oklab, #332B52 50%, transparent);
+  }
+  .bg-\[\#40275A\]\/50 {
+    background-color: color-mix(in oklab, #40275A 50%, transparent);
   }
 }
 * {
@@ -226,7 +238,7 @@
 }
 body {
   font-family: 'Georgia', 'Times New Roman', serif;
-  background: #ececec;
+  background: #ebebeb;
   color: #222;
   display: flex;
   min-height: 100vh;
@@ -237,14 +249,15 @@ body {
 }
 .sidebar {
   width: 280px;
-  background: #ececec;
+  background: #312f2f;
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
   height: 100vh;
   position: sticky;
   top: 0;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #ebebeb;
+  color: #ebebeb;
 }
 .sidebar .profile-header {
   display: flex;
@@ -282,7 +295,7 @@ body {
 }
 .nav-links a {
   text-decoration: none;
-  color: #222;
+  color: #ebebeb;
   font-size: 24px;
   display: inline-block;
   transition: opacity 0.2s;
@@ -308,10 +321,10 @@ body {
   margin-top: auto;
   font-size: 13px;
   line-height: 1.8;
-  color: #444;
+  color: #ebebeb;
 }
 .sidebar .contact-info a {
-  color: #222;
+  color: #ebebeb;
   text-decoration: underline;
 }
 .main {
@@ -319,21 +332,75 @@ body {
   width: 100%;
   max-width: var(--container-7xl);
   flex: 1;
-  background-color: var(--color-white);
+  background-color: #ebebeb;
   padding-inline: calc(var(--spacing) * 12);
   padding-block: calc(var(--spacing) * 14);
 }
-.main h1 {
-  font-size: 32px;
-  margin-bottom: 16px;
+.intro {
+  margin-bottom: calc(var(--spacing) * 2);
+  max-width: var(--container-3xl);
+  border-bottom-style: var(--tw-border-style);
+  border-bottom-width: 2px;
+  padding-top: calc(var(--spacing) * 3);
+  padding-bottom: calc(var(--spacing) * 3.5);
 }
-.main p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333;
-  max-width: 640px;
+.intro-greeting {
+  margin-bottom: calc(var(--spacing) * 6);
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+  text-transform: uppercase;
+  opacity: 65%;
+}
+.intro h1 {
+  margin: 0px;
+  --tw-leading: calc(var(--spacing) * 8);
+  line-height: calc(var(--spacing) * 8);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+.intro h1 span {
+  margin-top: calc(var(--spacing) * 6);
+  display: block;
+  font-size: var(--text-2xl);
+  line-height: var(--tw-leading, var(--text-2xl--line-height));
+  --tw-font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-normal);
+  opacity: 70%;
+}
+.intro hr {
+  margin-top: calc(var(--spacing) * 2);
+  max-width: calc(var(--spacing) * 50);
+  background-color: color-mix(in oklab, #7b8cde 80%, transparent);
+}
+.intro-description {
+  margin-top: calc(var(--spacing) * 6);
+  max-width: var(--container-2xl);
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 .technologies {
+  position: relative;
+  border-bottom-style: var(--tw-border-style);
+  border-bottom-width: 2px;
+  padding-block: calc(var(--spacing) * 8);
+  @media (width >= 40rem) {
+    padding-block: calc(var(--spacing) * 12);
+  }
+}
+.technology_header {
+  font-size: var(--text-3xl);
+  line-height: var(--tw-leading, var(--text-3xl--line-height));
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+}
+.technology_subheader {
+  margin-bottom: calc(var(--spacing) * 2);
+  font-size: var(--text-lg);
+  line-height: var(--tw-leading, var(--text-lg--line-height));
+  --tw-font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-medium);
+}
+.technologies-grid {
+  margin-block: calc(var(--spacing) * 8);
   display: grid;
   grid-auto-rows: minmax(0, 1fr);
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -350,28 +417,40 @@ body {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
-.technologies > div {
+.technologies-grid > div {
   display: flex;
   height: 100%;
   gap: calc(var(--spacing) * 4);
   border-radius: var(--radius-xl);
   border-style: var(--tw-border-style);
   border-width: 1px;
-  background-color: var(--color-blue-300);
+  background-color: color-mix(in oklab, #7b8cde 60%, transparent);
   padding: calc(var(--spacing) * 2);
 }
-.technologies > div > .logo {
+.technologies-grid > div > div:first-child {
   display: flex;
   flex-shrink: 0;
   border-radius: var(--radius-lg);
   padding: calc(var(--spacing) * 3);
 }
-.technologies > div > .logo > img {
+.technologies-grid > div > div > img {
   display: flex;
   height: calc(var(--spacing) * 12);
   width: calc(var(--spacing) * 12);
   flex-shrink: 0;
   border-radius: var(--radius-lg);
+}
+.technologies-grid > div > div > p:first-child {
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+}
+.technologies-grid > div > div > p:nth-child(2) {
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+  --tw-font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-medium);
 }
 .hamburger {
   display: none;
@@ -400,11 +479,12 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 16px 24px;
-    background: #ececec;
+    background: #312f2f;
     position: sticky;
     top: 0;
     z-index: 100;
     border-bottom: 1px solid #ddd;
+    color: #ebebeb;
   }
   .mobile-nav .profile-header {
     flex-direction: row;
@@ -423,13 +503,16 @@ body {
 .hamburger {
   display: flex;
 }
+.hamburger span {
+  background-color: #ebebeb;
+}
 .mobile-nav .nav-links {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
   flex-direction: column;
-  background: #ececec;
+  background: #312f2f;
   gap: 18px;
   max-height: 0;
   overflow: hidden;
@@ -449,21 +532,26 @@ body {
   inherits: false;
   initial-value: 0;
 }
-@property --tw-font-weight {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
   initial-value: solid;
 }
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-space-y-reverse: 0;
-      --tw-font-weight: initial;
       --tw-border-style: solid;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
     }
   }
 }
