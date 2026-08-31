@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Christian Jay Moran, a backend-focused software engineer based in Kansas.">
+    <title>Christian Jay Moran — Software Engineer</title>
+    <style>
+        :root {
+            --bg: #08070d;
+            --surface: #12101a;
+            --surface-2: #191624;
+            --text: #f5f3ff;
+            --muted: #aaa4ba;
+            --purple: #a979ff;
+            --purple-2: #7c3aed;
+            --border: rgba(255,255,255,.09);
+            --max: 1160px;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            color: var(--text);
+            background:
+                    radial-gradient(circle at 75% 5%, rgba(124,58,237,.18), transparent 28rem),
+                    radial-gradient(circle at 5% 45%, rgba(169,121,255,.08), transparent 24rem),
+                    var(--bg);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+        }
+        body.is-loading { overflow: hidden; }
+        .page-loader {
+            position: fixed; inset: 0; z-index: 9999;
+            display: grid; place-items: center;
+            background:
+                    radial-gradient(circle at 50% 48%, rgba(124,58,237,.18), transparent 20rem),
+                    var(--bg);
+            opacity: 1; visibility: visible;
+            transition: opacity .65s cubic-bezier(.4,0,.2,1), visibility .65s;
+        }
+        .page-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-inner { width: min(280px, calc(100vw - 56px)); text-align: center; }
+        .loader-mark {
+            display: inline-flex; align-items: baseline;
+            font-size: clamp(3.8rem, 14vw, 6rem); font-weight: 850;
+            line-height: 1; letter-spacing: -.08em;
+            animation: loader-breathe 1.15s ease-in-out infinite alternate;
+        }
+        .loader-mark span { color: var(--purple); }
+        .loader-label { margin: 18px 0 14px; color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+        .loader-track { height: 2px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.1); }
+        .loader-bar { width: 42%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, transparent, var(--purple), #d8b4fe); animation: loader-slide 1s cubic-bezier(.65,0,.35,1) infinite; }
+        @keyframes loader-slide { from { transform: translateX(-110%); } to { transform: translateX(345%); } }
+        @keyframes loader-breathe { from { transform: scale(.96); filter: drop-shadow(0 0 0 rgba(169,121,255,0)); } to { transform: scale(1); filter: drop-shadow(0 0 22px rgba(169,121,255,.28)); } }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+        .nav {
+            position: sticky; top: 0; z-index: 20;
+            background: rgba(8,7,13,.78); border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+        }
+        .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+        .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.15rem; }
+        .brand span { color: var(--purple); }
+        .nav-links { display: flex; gap: 26px; align-items: center; color: var(--muted); font-size: .92rem; font-weight: 650; }
+        .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+        .nav-links .contact { padding: 9px 15px; color: var(--text); border: 1px solid rgba(169,121,255,.4); border-radius: 999px; }
+        main { overflow: hidden; }
+        .hero { min-height: 680px; display: grid; grid-template-columns: 1.35fr .65fr; gap: 70px; align-items: center; padding: 110px 0 90px; }
+        .eyebrow { margin: 0 0 20px; color: var(--purple); font-size: .82rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+        h1 { margin: 0; font-size: clamp(3.3rem, 7vw, 6.8rem); line-height: .92; letter-spacing: -.072em; max-width: 850px; }
+        h1 span { display: block; margin-top: 18px; color: var(--muted); font-size: clamp(1.25rem, 2.7vw, 2rem); line-height: 1.2; letter-spacing: -.035em; font-weight: 500; }
+        .hero-copy { max-width: 650px; margin: 34px 0 0; color: #c7c2d2; font-size: clamp(1.05rem, 2vw, 1.24rem); }
+        .hero-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+        .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 19px; border-radius: 10px; font-weight: 750; font-size: .92rem; transition: transform .2s, background .2s, border-color .2s; }
+        .button:hover { transform: translateY(-2px); }
+        .button-primary { background: linear-gradient(135deg, var(--purple), var(--purple-2)); color: #fff; box-shadow: 0 10px 30px rgba(124,58,237,.25); }
+        .button-secondary { border: 1px solid var(--border); background: rgba(255,255,255,.035); }
+        .code-card { position: relative; border: 1px solid var(--border); border-radius: 18px; padding: 24px; background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.018)); box-shadow: 0 30px 80px rgba(0,0,0,.35); transform: rotate(2deg); }
+        .code-card::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; background: linear-gradient(135deg, rgba(169,121,255,.55), transparent 36%); z-index: -1; }
+        .dots { display: flex; gap: 7px; margin-bottom: 24px; } .dots i { width: 8px; height: 8px; border-radius: 50%; background: #423d4b; }
+        pre { margin: 0; color: #c9c3d7; font: 500 .83rem/1.85 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; }
+        .syntax { color: var(--purple); } .syntax-2 { color: #d8b4fe; }
+        section { padding: 95px 0; }
+        .section-head { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 42px; }
+        .section-label { margin: 0 0 10px; color: var(--purple); font-size: .75rem; letter-spacing: .15em; font-weight: 800; text-transform: uppercase; }
+        h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.05; letter-spacing: -.05em; }
+        .section-description { max-width: 470px; margin: 0; color: var(--muted); }
+        #technologies { position: relative; padding-block: 125px; }
+        #technologies::before { content: ""; position: absolute; z-index: -1; inset: 50px -100vw; background: linear-gradient(180deg, transparent, rgba(124,58,237,.065) 20%, rgba(124,58,237,.065) 80%, transparent); border-block: 1px solid rgba(169,121,255,.08); }
+        .technology-heading { max-width: 660px; }
+        .technology-heading h2 { font-size: clamp(2.5rem, 5vw, 4.4rem); }
+        .tech-group + .tech-group { margin-top: 88px; }
+        .group-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 26px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+        .group-title { margin: 0 0 5px; font-size: 1.35rem; letter-spacing: -.03em; }
+        .group-description { margin: 0; color: var(--muted); font-size: .94rem; }
+        .group-count { flex: 0 0 auto; color: var(--purple); font: 700 .76rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; }
+        .tech-grid { display: grid; gap: 18px; }
+        #current-tech { grid-template-columns: repeat(4, 1fr); }
+        #previous-tech { grid-template-columns: repeat(3, 1fr); }
+        .tech-card { position: relative; min-width: 0; min-height: 178px; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 24px; padding: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,.11); border-radius: 18px; background: linear-gradient(145deg, rgba(31,27,44,.94), rgba(18,16,26,.86)); box-shadow: 0 14px 35px rgba(0,0,0,.16); isolation: isolate; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+        .tech-card::before { content: ""; position: absolute; z-index: -1; width: 150px; height: 150px; top: -75px; right: -65px; border-radius: 50%; background: var(--card-glow, rgba(169,121,255,.2)); filter: blur(4px); opacity: .35; transition: opacity .25s, transform .25s; }
+        .tech-card::after { content: ""; position: absolute; top: 25px; right: 25px; width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.2); box-shadow: 0 0 0 5px rgba(255,255,255,.025); transition: background .25s, transform .25s, box-shadow .25s; }
+        .tech-card:hover { transform: translateY(-7px); border-color: rgba(169,121,255,.55); box-shadow: 0 22px 50px rgba(0,0,0,.28), 0 0 0 1px rgba(169,121,255,.08); }
+        .tech-card:hover::before { opacity: .75; transform: scale(1.12); }
+        .tech-card:hover::after { background: var(--purple); transform: scale(1.1); box-shadow: 0 0 0 6px rgba(169,121,255,.09); }
+        .icon { flex: 0 0 62px; width: 62px; height: 62px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.1); border-radius: 15px; background: rgba(169,121,255,.11); }
+        .icon img { width: 34px; height: 34px; object-fit: contain; }
+        .tech-name { margin: 0; font-weight: 790; font-size: 1.12rem; letter-spacing: -.025em; }
+        .tech-type { margin: 3px 0 0; color: var(--muted); font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        #previous-tech .tech-card { min-height: 154px; flex-direction: row; align-items: center; justify-content: flex-start; }
+        .highlights { background: rgba(255,255,255,.018); border-block: 1px solid var(--border); }
+        .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .project { min-height: 260px; display: flex; flex-direction: column; padding: 27px; border: 1px solid var(--border); border-radius: 18px; background: linear-gradient(155deg, rgba(169,121,255,.1), rgba(18,16,26,.7) 45%); }
+        .project-number { color: var(--purple); font: 700 .8rem ui-monospace, monospace; }
+        .project h3 { margin: auto 0 9px; font-size: 1.35rem; letter-spacing: -.035em; }
+        .project p { margin: 0; color: var(--muted); font-size: .9rem; }
+        .project-note { margin-top: 17px; color: #d8b4fe; font-size: .77rem; font-weight: 700; }
+        footer { padding: 60px 0; }
+        .footer-inner { display: flex; justify-content: space-between; gap: 30px; color: var(--muted); font-size: .88rem; }
+        .footer-inner a { color: var(--text); }
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; gap: 55px; padding-top: 90px; }
+            .code-card { max-width: 560px; transform: none; }
+            #current-tech, #previous-tech { grid-template-columns: repeat(2, 1fr); }
+            .project-grid { grid-template-columns: 1fr; }
+            .project { min-height: 210px; }
+        }
+        @media (max-width: 620px) {
+            .container { width: min(calc(100% - 28px), var(--max)); }
+            .nav-inner { height: 64px; }
+            .nav-links a:not(.contact) { display: none; }
+            .hero { padding: 76px 0 52px; }
+            h1 { font-size: clamp(3rem, 15vw, 4.5rem); }
+            section { padding: 70px 0; }
+            #technologies { padding-block: 90px; }
+            .section-head { display: block; } .section-description { margin-top: 18px; }
+            #current-tech, #previous-tech { grid-template-columns: 1fr; }
+            .tech-card { padding: 15px; }
+            #current-tech .tech-card { min-height: 150px; }
+            #previous-tech .tech-card { min-height: 120px; }
+            .group-head { align-items: start; }
+            .footer-inner { flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+    </style>
+</head>
+<body class="is-loading">
+<div class="page-loader" id="page-loader" role="status" aria-label="Loading portfolio">
+    <div class="loader-inner">
+        <div class="loader-mark" aria-hidden="true">CJ<span>.</span></div>
+        <p class="loader-label">Building the experience</p>
+        <div class="loader-track" aria-hidden="true"><div class="loader-bar"></div></div>
+    </div>
+</div>
+<nav class="nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+        <a class="brand" href="#top">CJ<span>.</span></a>
+        <div class="nav-links">
+            <a href="#about">About</a><a href="#technologies">Technologies</a><a href="#work">Work</a><a class="contact" href="mailto:hello@example.com">Get in touch</a>
+        </div>
+    </div>
+</nav>
+<main id="top">
+    <header class="container hero" id="about">
+        <div>
+            <p class="eyebrow">Backend-focused · Kansas based</p>
+            <h1>Christian Jay<br>“CJ” Moran<span>Software Engineer</span></h1>
+            <p class="hero-copy">I specialize in figuring out how to make things work—whether through thoughtful code, reliable infrastructure, or better processes.</p>
+            <div class="hero-actions"><a class="button button-primary" href="#work">Explore my work ↓</a><a class="button button-secondary" href="#technologies">View my toolkit</a></div>
+        </div>
+        <div class="code-card" aria-label="Decorative code sample">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <pre><span class="syntax">const</span> engineer = {
+  name: <span class="syntax-2">"CJ Moran"</span>,
+  focus: <span class="syntax-2">"Backend systems"</span>,
+  values: [
+    <span class="syntax-2">"clarity"</span>,
+    <span class="syntax-2">"reliability"</span>,
+    <span class="syntax-2">"continuous improvement"</span>
+  ],
+  location: <span class="syntax-2">"Kansas"</span>
+};</pre>
+        </div>
+    </header>
+    <section class="container" id="technologies">
+        <div class="section-head"><div class="technology-heading"><p class="section-label">Technical toolkit</p><h2>The technologies behind my work</h2></div><p class="section-description">The languages, platforms, and tools I use to turn complex requirements into dependable products and systems.</p></div>
+        <div class="tech-group"><div class="group-head"><div><h3 class="group-title">Current stack</h3><p class="group-description">The tools I work with most actively today.</p></div><span class="group-count">08 technologies</span></div><div class="tech-grid" id="current-tech"></div></div>
+        <div class="tech-group"><div class="group-head"><div><h3 class="group-title">Additional experience</h3><p class="group-description">Technologies I’ve used previously and can still draw on.</p></div><span class="group-count">06 technologies</span></div><div class="tech-grid" id="previous-tech"></div></div>
+    </section>
+    <section class="highlights" id="work"><div class="container">
+        <div class="section-head"><div><p class="section-label">Selected work</p><h2>Work highlights</h2></div><p class="section-description">A flexible starting point for case studies that demonstrate impact, ownership, and technical judgment.</p></div>
+        <div class="project-grid">
+            <article class="project"><span class="project-number">01 / SYSTEMS</span><h3>Backend architecture</h3><p>Highlight a service, integration, or system you designed—and the measurable problem it solved.</p><span class="project-note">ADD CASE STUDY →</span></article>
+            <article class="project"><span class="project-number">02 / PROCESS</span><h3>Developer efficiency</h3><p>Show how you simplified a workflow, automated repetitive work, or improved team delivery.</p><span class="project-note">ADD CASE STUDY →</span></article>
+            <article class="project"><span class="project-number">03 / PRODUCT</span><h3>Product engineering</h3><p>Feature a customer-facing or internal product and explain your role from idea through launch.</p><span class="project-note">ADD CASE STUDY →</span></article>
+        </div>
+    </div></section>
+</main>
+<footer><div class="container footer-inner"><span>© <span id="year"></span> Christian Jay Moran</span><span>Designed and built with intention.</span></div></footer>
+<script>
+    const current = [['typescript','TypeScript','JavaScript superset'],['react','React','JavaScript library'],['git','Git','Version control'],['supabase','Supabase','Backend platform'],['tailwind','Tailwind CSS','CSS framework'],['postgresql','PostgreSQL','Relational database'],['postman','Postman','API development'],['retool','Retool','Low-code development']];
+    const previous = [['csharp','C#','OOP language'],['javascript','JavaScript','Web scripting language'],['nextjs','Next.js','React framework'],['jira','Jira','Project management'],['php','PHP','Server-side scripting'],['laravel','Laravel','PHP framework']];
+    const glows = ['rgba(129,140,248,.42)','rgba(56,189,248,.38)','rgba(249,115,22,.36)','rgba(52,211,153,.38)','rgba(34,211,238,.35)','rgba(96,165,250,.38)','rgba(251,113,133,.36)','rgba(169,121,255,.42)'];
+    const renderTech = (items, target) => document.getElementById(target).innerHTML = items.map(([icon,name,type], index) => `<article class="tech-card" style="--card-glow:${glows[index % glows.length]}"><div class="icon"><img src="https://morancjr.github.io/assets/icons/${icon}.svg" alt="${name} logo" loading="lazy"></div><div><p class="tech-name">${name}</p><p class="tech-type">${type}</p></div></article>`).join('');
+    renderTech(current, 'current-tech'); renderTech(previous, 'previous-tech');
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const loader = document.getElementById('page-loader');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const loaderStart = performance.now();
+    window.addEventListener('load', () => {
+        const minimumDisplay = reduceMotion ? 0 : 1150;
+        const remaining = Math.max(0, minimumDisplay - (performance.now() - loaderStart));
+        window.setTimeout(() => {
+            loader.classList.add('is-hidden');
+            document.body.classList.remove('is-loading');
+            window.setTimeout(() => loader.remove(), reduceMotion ? 0 : 700);
+        }, remaining);
+    });
+</script>
+</body>
+</html>
