@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Georgia', 'Times New Roman', serif;
-    background: #ececec;
+    background: #ebebeb;
     color: #222;
     display: flex;
     min-height: 100vh;
@@ -22,14 +22,15 @@ body {
 /* ---- SIDEBAR ---- */
 .sidebar {
     width: 280px;
-    background: #ececec;
+    background: #312f2f;
     padding: 32px 28px;
     display: flex;
     flex-direction: column;
     height: 100vh;
     position: sticky;
     top: 0;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid #ebebeb;
+    color: #ebebeb;
 }
 
 .sidebar .profile-header {
@@ -74,7 +75,7 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: #222;
+    color: #ebebeb;
     font-size: 24px;
     display: inline-block;
     transition: opacity 0.2s;
@@ -104,45 +105,80 @@ body {
     margin-top: auto;
     font-size: 13px;
     line-height: 1.8;
-    color: #444;
+    color: #ebebeb;
 }
 
 .sidebar .contact-info a {
-    color: #222;
+    color: #ebebeb;
     text-decoration: underline;
 }
 
 /* ---- MAIN CONTENT  ---- */
 .main {
-    @apply flex-1 px-12 py-14 bg-white max-w-7xl mx-auto w-full;
+    @apply flex-1 px-12 py-14 bg-[#ebebeb] max-w-7xl mx-auto w-full;
 }
 
-.main h1 {
-    font-size: 32px;
-    margin-bottom: 16px;
+.intro {
+    @apply max-w-3xl pt-3 pb-3.5 border-b-2 mb-2
 }
 
-.main p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    max-width: 640px;
+.intro-greeting {
+    @apply mb-6 text-base uppercase opacity-65
+}
+
+.intro h1 {
+    @apply m-0 leading-8;
+    font-size: clamp(2.5rem, 5vw, 4rem)
+}
+
+.intro h1 span{
+    @apply block mt-6 font-normal opacity-70 text-2xl
+}
+
+.intro hr {
+    @apply max-w-50 bg-[#7b8cde]/80 mt-2
+}
+
+.intro-description {
+    @apply max-w-2xl mt-6;
+    font-size: 1.15rem;
+    line-height: 1.7;
 }
 
 .technologies {
-    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-4 auto-rows-fr;
+    @apply relative py-8 sm:py-12 border-b-2;
 }
 
-.technologies > div {
-    @apply flex gap-4 p-2 rounded-xl border h-full bg-blue-300;
+.technology_header {
+    @apply text-3xl font-bold;
 }
 
-.technologies > div > .logo {
+.technology_subheader {
+    @apply text-lg font-medium mb-2;
+}
+
+.technologies-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-between gap-4 auto-rows-fr my-8;
+}
+
+.technologies-grid > div {
+    @apply flex gap-4 p-2 rounded-xl border h-full bg-[#7b8cde]/60;
+}
+
+.technologies-grid > div > div:first-child {
     @apply flex p-3 rounded-lg shrink-0
 }
 
-.technologies > div > .logo > img {
+.technologies-grid > div > div > img {
     @apply flex rounded-lg shrink-0 w-12 h-12
+}
+
+.technologies-grid > div > div > p:first-child {
+    @apply text-xl font-bold
+}
+
+.technologies-grid > div > div > p:nth-child(2) {
+    @apply text-base font-medium
 }
 /* ---- HAMBURGER (hidden on desktop) ---- */
 .hamburger {
@@ -179,11 +215,12 @@ body {
         align-items: center;
         justify-content: space-between;
         padding: 16px 24px;
-        background: #ececec;
+        background: #312f2f;
         position: sticky;
         top: 0;
         z-index: 100;
         border-bottom: 1px solid #ddd;
+        color: #ebebeb;
     }
 
     .mobile-nav .profile-header {
@@ -207,6 +244,10 @@ body {
     display: flex;
 }
 
+.hamburger span {
+    background-color: #ebebeb;
+}
+
 /* collapse links off-screen until opened */
 .mobile-nav .nav-links {
     position: absolute;
@@ -214,7 +255,7 @@ body {
     left: 0;
     right: 0;
     flex-direction: column;
-    background: #ececec;
+    background: #312f2f;
     gap: 18px;
     max-height: 0;
     overflow: hidden;
